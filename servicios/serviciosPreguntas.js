@@ -30,7 +30,7 @@ class ServicioPreguntas{
     async agregarRespuesta(num, body){
         let indice = this.datos.preguntas.findIndex(elemento=>elemento.id==num);
         if(this.datos.preguntas.length===0 || indice===-1){
-            throw boom.notFound('No se encontró pregunta');
+            throw boom.notFound('No se encontró respuesta');
         }
         let elemento = this.datos.preguntas[indice];
         let id2 =  elemento.respuestas.length!==0?elemento.respuestas[elemento.respuestas.length-1].id+1:1;
@@ -41,7 +41,38 @@ class ServicioPreguntas{
         }
         this.datos.preguntas[indice].respuestas.push(objeto);
         let message = 'Respuesta agregada con exito';
+        actualizar(this.datos);
         return{message};
+    }
+    async editarPregunta(num, body){
+        let indice = this.datos.preguntas.findIndex(elemento=>elemento.id==num);
+        if(this.datos.preguntas.length===0 || indice===-1){
+            throw boom.notFound('No se encontró pregunta');
+        }
+        let elemento = this.datos.preguntas[indice];
+        this.datos.preguntas[indice]={
+            ...elemento,
+            ...body
+        }
+        actualizar(this.datos);
+        return{message:`Se modificó pregunta ${num} con exito`}
+    }
+    async editarRespuesta(num,num2, body){
+        let indice = this.datos.preguntas.findIndex(elemento=>elemento.id==num);
+        if(this.datos.preguntas.length===0 || indice===-1){
+            throw boom.notFound('No se encontró respuesta');
+        }
+        let resp = this.datos.preguntas[indice].respuestas;
+        let indice2=resp.findIndex(ele=>ele.id==num2);
+        if(indice2===-1){
+            throw boom.notFound('No se encontró respuesta');
+        }
+        let cuador = resp[indice2];
+        this.datos.preguntas[indice].respuestas[indice2]={
+            ...cuador,
+            ...body
+        }
+        return {message:"Se cambio respuesta o estado con exito"};
     }
 }
 

@@ -12,6 +12,8 @@ preguntas.get('/', async(req, res, next)=>{
     next(err);
   }
 });
+
+// ---------POST----------------------
 preguntas.post('/', async(req, res,next)=>{
     const cuerpo = req.body;
     try {
@@ -31,4 +33,31 @@ preguntas.post('/:id',async(req, res,next)=>{
         next(error);
     }
 });
+// -------------------------------------
+
+// -------------------PATCH------------------------
+preguntas.patch('/:id/pregunta',async (req, res, next)=>{
+    const{id}=req.params;
+    try {  
+        const mensaje = await servicios.editarPregunta(id, req.body);
+        res.json(mensaje)
+    } catch (error) {
+        next(error);
+    }
+});
+preguntas.patch('/:id/respuesta/:id2',async (req, res, next)=>{
+    const{id, id2}=req.params;
+    try {
+        const mandar = await servicios.editarRespuesta(id, id2,req.body);
+        res.json(mandar);
+    } catch (error) {
+        next(error);
+    }
+});
+
+//------------------------------------------
+
+// ----------------------DELETE----------------
+
+//---------------------------------------------
 module.exports={preguntas}

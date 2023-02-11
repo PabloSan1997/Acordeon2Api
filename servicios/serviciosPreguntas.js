@@ -72,7 +72,35 @@ class ServicioPreguntas{
             ...cuador,
             ...body
         }
+        actualizar(this.datos);
         return {message:"Se cambio respuesta o estado con exito"};
+    }
+    async borrarTodo(){
+        this.datos.preguntas=[];
+        actualizar(this.datos);
+        return {message: "Se han borrado todos los elementos"};
+    }
+    async borrarPregunta(num){
+        let indice = this.datos.preguntas.findIndex(elemento=>elemento.id==num);
+        if(this.datos.preguntas.length===0 || indice===-1){
+            throw boom.notFound('No se encontró respuesta');
+        }
+        this.datos.preguntas.splice(indice, 1);
+        actualizar(this.datos);
+        return{message:`Se borró elemento ${num}`}
+    }
+    async borrarRespuesta(num, num2){
+        let indice = this.datos.preguntas.findIndex(elemento=>elemento.id==num);
+        if(this.datos.preguntas.length===0 || indice===-1){
+            throw boom.notFound('No se encontró respuesta');
+        }
+        let indice2 = this.datos.preguntas[indice].respuestas.findIndex(elemento=>elemento.id==num2);
+        if(indice2===-1){
+            throw boom.notFound('No se encontró respuesta');
+        }
+        this.datos.preguntas[indice].respuestas.splice(indice2,1);
+        actualizar(this.datos);
+        return{message:`Se borró la respuesta ${num2} de la pregunta ${num}`};
     }
 }
 

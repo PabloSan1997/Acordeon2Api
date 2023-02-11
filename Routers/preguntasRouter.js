@@ -58,6 +58,32 @@ preguntas.patch('/:id/respuesta/:id2',async (req, res, next)=>{
 //------------------------------------------
 
 // ----------------------DELETE----------------
+    preguntas.delete('/todo',async(req, res, next)=>{
+        try {
+            const borrar= await servicios.borrarTodo();
+            res.json(borrar);
+        } catch (error) {
+            next(error);
+        }
+    });
+    preguntas.delete('/:id',async(req, res, next)=>{
+        const{id}=req.params;
+        try {
+            const borrar= await servicios.borrarPregunta(id);
+            res.json(borrar);
+        } catch (error) {
+            next(error);
+        }
+    });
+    preguntas.delete('/:id/borrar/:id2',async(req, res, next)=>{
+        const{id, id2}=req.params;
+        try {
+            const borrar= await servicios.borrarRespuesta(id, id2);
+            res.json(borrar);
+        } catch (error) {
+            next(error);
+        }
+    });
 
 //---------------------------------------------
 module.exports={preguntas}

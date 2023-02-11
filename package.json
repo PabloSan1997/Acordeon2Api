@@ -1,0 +1,32 @@
+{
+  "name": "acordeonexam2",
+  "version": "1.0.0",
+  "description": "Acordion version 2 para los examenes en linea ",
+  "main": "index.js",
+  "scripts": {
+    "test": "none",
+    "start": "node index.js",
+    "autom": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PabloSan1997/Acordeon2Api.git"
+  },
+  "keywords": [
+    "ApiREST",
+    "NodeJS"
+  ],
+  "author": "Pablo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PabloSan1997/Acordeon2Api/issues"
+  },
+  "homepage": "https://github.com/PabloSan1997/Acordeon2Api#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@hapi/boom": "^10.0.1",
+    "joi": "^17.7.1"
+  }
+}

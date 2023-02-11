@@ -1,0 +1,36 @@
+{
+    "preguntas": [
+        {
+            "id": 1,
+            "pregunta": "esta es la pregunta",
+            "respuestas": [
+                {
+                    "id": 1,
+                    "respuesta": "esta es la respuesta 1",
+                    "estado": false
+                },
+                {
+                    "id": 2,
+                    "respuesta": "esta es la respuesta 2",
+                    "estado": false
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "pregunta": "esta es la pregunta 2",
+            "respuestas": [
+                {
+                    "id": 1,
+                    "respuesta": "esta es la respuesta 1.2",
+                    "estado": false
+                },
+                {
+                    "id": 2,
+                    "respuesta": "esta es la respuesta 2.2",
+                    "estado": false
+                }
+            ]
+        }
+    ]
+}

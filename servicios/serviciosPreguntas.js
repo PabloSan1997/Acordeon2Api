@@ -1,4 +1,4 @@
-const express = require('express');
+
 const { datos, actualizar } = require('../datos/mDatos.js');
 const boom = require('@hapi/boom');
 

@@ -83,7 +83,7 @@ class ServicioPreguntas{
     async borrarPregunta(num){
         let indice = this.datos.preguntas.findIndex(elemento=>elemento.id==num);
         if(this.datos.preguntas.length===0 || indice===-1){
-            throw boom.notFound('No se encontró respuesta');
+            throw boom.notFound('No se encontró pregunta');
         }
         this.datos.preguntas.splice(indice, 1);
         actualizar(this.datos);

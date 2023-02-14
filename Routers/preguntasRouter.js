@@ -1,7 +1,7 @@
 const express = require('express');
+const { verificarPregunta, verificarRespuesta, editarRespuesta, validatorHandler } = require('../esquemas/esquemaHandle.js');
 const { ServicioPreguntas } = require('../servicios/serviciosPreguntas.js');
 const preguntas = express.Router();
-
 const servicios = new ServicioPreguntas();
 
 preguntas.get('/', async(req, res, next)=>{
@@ -14,7 +14,7 @@ preguntas.get('/', async(req, res, next)=>{
 });
 
 // ---------POST----------------------
-preguntas.post('/', async(req, res,next)=>{
+preguntas.post('/',validatorHandler(verificarPregunta, 'body') ,async(req, res,next)=>{
     const cuerpo = req.body;
     try {
         const mandar = await servicios.agregar(cuerpo);
@@ -23,7 +23,7 @@ preguntas.post('/', async(req, res,next)=>{
         next(error);
     }
 });
-preguntas.post('/:id',async(req, res,next)=>{
+preguntas.post('/:id',validatorHandler(verificarRespuesta, 'body'),async(req, res,next)=>{
     const {id}=req.params;
     const {body}=req;
     try {
@@ -36,7 +36,7 @@ preguntas.post('/:id',async(req, res,next)=>{
 // -------------------------------------
 
 // -------------------PATCH------------------------
-preguntas.patch('/:id/pregunta',async (req, res, next)=>{
+preguntas.patch('/:id/pregunta',validatorHandler(verificarPregunta, 'body'),async (req, res, next)=>{
     const{id}=req.params;
     try {  
         const mensaje = await servicios.editarPregunta(id, req.body);
@@ -45,7 +45,7 @@ preguntas.patch('/:id/pregunta',async (req, res, next)=>{
         next(error);
     }
 });
-preguntas.patch('/:id/respuesta/:id2',async (req, res, next)=>{
+preguntas.patch('/:id/respuesta/:id2',validatorHandler(editarRespuesta, 'body'),async (req, res, next)=>{
     const{id, id2}=req.params;
     try {
         const mandar = await servicios.editarRespuesta(id, id2,req.body);
